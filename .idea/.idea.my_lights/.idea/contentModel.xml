@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Luís Soares\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Luís Soares\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_my_lights.949970797.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Luís Soares\RiderProjects\my_lights" t="IncludeRecursive">
+      <e p=".gitignore" t="Include" />
+      <e p="App.xaml" t="Include" />
+      <e p="App.xaml.cs" t="Include" />
+      <e p="AssemblyInfo.cs" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="MainWindow.xaml" t="Include" />
+      <e p="MainWindow.xaml.cs" t="Include" />
+      <e p="my_lights.csproj" t="IncludeRecursive" />
+      <e p="my_lights.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="netcoreapp3.1" t="Include">
+            <e p="App.g.cs" t="Include" />
+            <e p="MainWindow.g.cs" t="Include" />
+            <e p="my_lights.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Yeelights.cs" t="Include" />
+    </e>
+  </component>
+</project>
