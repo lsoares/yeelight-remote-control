@@ -1,14 +1,7 @@
 ﻿<Window x:Class="my_lights.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:my_lights"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-
-    <Button Click="ButtonBase_OnClick"
-            Content="Hello"
-            Margin="5" Width="150" Height="50"
-            HorizontalAlignment="Left" />
+        Title="AddControls" Height="214" Width="212">
+    <StackPanel Name="splMain">
+    </StackPanel>
 </Window>
