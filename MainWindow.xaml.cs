@@ -11,13 +11,13 @@ namespace my_lights
         public MainWindow() {
             _yee.discover((o, args) => {
                 Dispatcher?.Invoke(() => {
-                    Button button = new Button {Content = args.Device.Hostname.ToString()};
+                    var device = args.Device;
+                    Button button = new Button {Content = device.Hostname};
                     splMain.Children.Add(button);
-                    button.Click += (sender1, eventArgs) => {
-                        Dispatcher?.Invoke(async () => {
-                            await args.Device.TurnOff();
-                            args.Device.SupportedOperations.ForEach((el) => Console.WriteLine(el));
-                        });
+                    button.Click += async (sender1, eventArgs) => {
+                        await device.Connect();
+                        await device.Toggle();
+                        device.Disconnect();
                     };
                 });
             });
