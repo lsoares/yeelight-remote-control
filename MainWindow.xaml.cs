@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
 using YeelightAPI;
+using YeelightAPI.Models;
 
 namespace my_lights
 {
@@ -26,17 +27,19 @@ namespace my_lights
             Console.WriteLine(JsonConvert.SerializeObject(device));
 
             // on/off
-            var title = new TextBlock { Text = device.Name};
+            var title = new TextBlock {Text = device.Name};
             row.Children.Add(title);
             var toggleBt = new Button {Content = "⚡"};
             toggleBt.Click += async (sender1, eventArgs) => { await device.Toggle(); };
             row.Children.Add(toggleBt);
 
             // increase/decrease brightness
+            var currentBrightness = Convert.ToDouble((string) (await device.GetProp(PROPERTIES.bright)));
             var brightnessSlider = new Slider {
-                Minimum = 0, Maximum = 100, IsMoveToPointEnabled = true, IsSnapToTickEnabled = true,
-                TickFrequency = 10
+                Minimum = 1, Maximum = 100, IsMoveToPointEnabled = true, IsSnapToTickEnabled = true,
+                TickFrequency = 5, Value = currentBrightness
             };
+            Console.WriteLine(currentBrightness);
             brightnessSlider.ValueChanged += async (sender, eventArgs) => {
                 var value = Convert.ToInt32(Math.Round(eventArgs.NewValue));
                 await device.SetBrightness(value);
