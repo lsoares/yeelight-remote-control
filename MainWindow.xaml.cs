@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
@@ -27,7 +28,7 @@ namespace my_lights
             Console.WriteLine(JsonConvert.SerializeObject(device));
 
             // on/off
-            var title = new TextBlock {Text = device.Name};
+            var title = new TextBlock {Text = device.Name, ToolTip = device.Hostname};
             row.Children.Add(title);
             var toggleBt = new Button {Content = "⚡"};
             toggleBt.Click += async (sender1, eventArgs) => { await device.Toggle(); };
@@ -39,15 +40,24 @@ namespace my_lights
                 Minimum = 1, Maximum = 100, IsMoveToPointEnabled = true, IsSnapToTickEnabled = true,
                 TickFrequency = 5, Value = currentBrightness
             };
-            Console.WriteLine(currentBrightness);
             brightnessSlider.ValueChanged += async (sender, eventArgs) => {
                 var value = Convert.ToInt32(Math.Round(eventArgs.NewValue));
                 await device.SetBrightness(value);
             };
             row.Children.Add(brightnessSlider);
-            // set mode
+
+            // set mode (moonlight/daylight)
+            var daylightButton = new Button {Content = "☀", ToolTip = "Set sun mode"};
+            daylightButton.Click += async (sender, args) => { await device.SetPower(true, null, PowerOnMode.Ct); };
+            row.Children.Add(daylightButton);
+            // TODO smooth if is turned off
+            var moonlightButton = new Button {Content = "🌙", ToolTip = "Set moon mode"};
+            moonlightButton.Click += async (sender, args) => { await device.SetPower(true, null, PowerOnMode.Night); };
+            row.Children.Add(moonlightButton);
 
             // set temp
+            // set default
+            // set name
         }
     }
 }
