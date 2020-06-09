@@ -2,7 +2,17 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AddControls" Height="214" Width="212"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         Loaded="Window_Loaded">
-    <StackPanel Name="splMain">
-    </StackPanel>
+    <!-- <ItemsControl /> -->
+    <StackPanel Name="splMain" />
+    <!-- <materialDesign:Card> -->
+    <!--     <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">My First Material Design App</TextBlock> -->
+    <!-- </materialDesign:Card> -->
 </Window>
