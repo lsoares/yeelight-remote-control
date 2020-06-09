@@ -30,7 +30,11 @@ namespace my_lights
             var content = new StackPanel {Orientation = Orientation.Horizontal};
             row.Children.Add(content);
 
-            var toggleBt = new ToggleButton {Content = "⚡", Width = 32};
+            var toggleBt = new ToggleButton {
+                Content = "⚡",
+                Width = 32,
+                IsChecked = (string) await device.GetProp(PROPERTIES.power) == "on",
+            };
             toggleBt.Click += async (sender1, eventArgs) => { await device.Toggle(); };
             content.Children.Add(toggleBt);
 
