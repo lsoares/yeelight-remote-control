@@ -38,27 +38,42 @@ namespace my_lights
             toggleBt.Click += async (sender1, eventArgs) => { await device.Toggle(); };
             content.Children.Add(toggleBt);
 
+            var isDayLight = (string) await device.GetProp(PROPERTIES.active_mode) == "0";
+            var brightness = await device.GetProp(isDayLight ? PROPERTIES.bright : PROPERTIES.nl_br);
             // increase/decrease brightness
-            var currentBrightness = Convert.ToDouble((string) (await device.GetProp(PROPERTIES.bright)));
             var brightnessSlider = new Slider {
-                Minimum = 1, Maximum = 100, IsMoveToPointEnabled = true, IsSnapToTickEnabled = true,
-                TickFrequency = 5, Value = currentBrightness, Width = 100
+                Minimum = 1,
+                Maximum = 100,
+                IsMoveToPointEnabled = true,
+                IsSnapToTickEnabled = true,
+                TickFrequency = 5,
+                Value = Convert.ToDouble((string) brightness),
+                Width = 100,
             };
-            brightnessSlider.ValueChanged += async (sender, eventArgs) => {
-                var value = Convert.ToInt32(Math.Round(eventArgs.NewValue));
+            brightnessSlider.PreviewMouseUp += async (sender, eventArgs) => {
+                var value = Convert.ToInt32(Math.Round(brightnessSlider.Value));
                 await device.SetBrightness(value);
+                Console.WriteLine("nl_br value: " + await device.GetProp(PROPERTIES.nl_br));
             };
             content.Children.Add(brightnessSlider);
-            
+
             // set mode (moonlight/daylight)
-            var daylightButton = new Button
-                {Content = "☀", Width = 32, ToolTip = "Set sun mode", Margin = new Thickness(4)};
-            daylightButton.Click += async (sender, args) => { await device.SetPower(true, null, PowerOnMode.Ct); };
+            var daylightButton = new Button { 
+                Content = "☀",
+                Width = 32,
+                ToolTip = "Set sun mode",
+                Margin = new Thickness(4)
+            };
+            daylightButton.Click += async (sender, args) => await device.SetPower(true, null, PowerOnMode.Ct);
             content.Children.Add(daylightButton);
             // TODO smooth if is turned off
-            var moonlightButton = new Button
-                {Content = "🌙", Width = 32, ToolTip = "Set moon mode", Margin = new Thickness(4)};
-            moonlightButton.Click += async (sender, args) => { await device.SetPower(true, null, PowerOnMode.Night); };
+            var moonlightButton = new Button {
+                Content = "🌙",
+                Width = 32,
+                ToolTip = "Set moon mode", 
+                Margin = new Thickness(4)
+            };
+            moonlightButton.Click += async (sender, args) => await device.SetPower(true, null, PowerOnMode.Night);
             content.Children.Add(moonlightButton);
 
             // set temp
