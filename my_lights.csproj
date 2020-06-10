@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MaterialDesignThemes" Version="3.2.0-ci1494" />
       <PackageReference Include="YeelightAPI" Version="1.7.0" />
     </ItemGroup>
 
