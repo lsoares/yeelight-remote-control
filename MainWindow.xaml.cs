@@ -50,10 +50,9 @@ namespace my_lights
                 Value = Convert.ToDouble((string) brightness),
                 Width = 100,
             };
-            brightnessSlider.PreviewMouseUp += async (sender, eventArgs) => {
+            brightnessSlider.MouseUp += async (sender, eventArgs) => {
                 var value = Convert.ToInt32(Math.Round(brightnessSlider.Value));
                 await device.SetBrightness(value);
-                Console.WriteLine("nl_br value: " + await device.GetProp(PROPERTIES.nl_br));
             };
             content.Children.Add(brightnessSlider);
 
