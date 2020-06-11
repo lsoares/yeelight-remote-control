@@ -44,7 +44,7 @@ namespace my_lights
             await _device.SetColorTemperature(value, 10);
         }
 
-        public async Task<double> GetTemperature() {
+        public async Task<double> GetTemperature() { // 2700~5700
             await Connect();
             return Int32.Parse((string) await _device.GetProp(PROPERTIES.ct));
         }
@@ -60,7 +60,10 @@ namespace my_lights
         }
 
         private async Task Connect() {
-            if (!_device.IsConnected) await _device.Connect();
+            if (!_device.IsConnected) {
+                Console.WriteLine("Reconnecting..");
+                await _device.Connect();
+            }
         }
     }
 }
