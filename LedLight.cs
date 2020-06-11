@@ -1,6 +1,6 @@
 using System;
-using System.Globalization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using YeelightAPI;
 using YeelightAPI.Models;
 
@@ -11,8 +11,12 @@ namespace my_lights
         private readonly Device _device;
 
         public LedLight(Device device) {
-            this._device = device;
+            _device = device;
+            Console.WriteLine(JsonConvert.SerializeObject(device));
         }
+
+        public object Name => _device.Name;
+        public object Hostname => _device.Hostname;
 
         public async Task TogglePower() {
             await Connect();
@@ -32,9 +36,19 @@ namespace my_lights
 
         public async Task SetBrightness(int value) {
             await Connect();
-            await _device.SetBrightness(value);
+            await _device.SetBrightness(value, 10);
         }
 
+        public async Task SetTemperature(int value) {
+            await Connect();
+            await _device.SetColorTemperature(value, 10);
+        }
+
+        public async Task<double> GetTemperature() {
+            await Connect();
+            return Int32.Parse((string) await _device.GetProp(PROPERTIES.ct));
+        }
+        
         public async Task SetDayLight() {
             await Connect();
             await _device.SetPower(true, null, PowerOnMode.Ct);
