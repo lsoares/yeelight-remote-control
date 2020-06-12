@@ -30,6 +30,7 @@ namespace my_lights
                 Width = 32,
                 IsChecked = await led.IsPowerOn(),
             };
+            led.PowerToggled += async() => toggleBt.IsChecked = await led.IsPowerOn();  
             toggleBt.Click += async (sender1, eventArgs) => await led.TogglePower();
             content.Children.Add(toggleBt);
             SplMain.Children.Add(row);
@@ -47,6 +48,7 @@ namespace my_lights
             };
             brightnessSlider.PreviewMouseUp += async (sender, eventArgs) =>
                 await led.SetBrightness(Convert.ToInt32(Math.Round(brightnessSlider.Value)));
+            led.PowerToggled += async() => brightnessSlider.Value = await led.GetBrightness();
             content.Children.Add(brightnessSlider);
 
             // set mode (moonlight/daylight)
@@ -59,6 +61,7 @@ namespace my_lights
                 IsChecked = await led.IsMoonLight(),
             };
             moonlightButton.Click += async (sender, args) => await led.SetMoonLight();
+            led.PowerToggled += async() => moonlightButton.IsChecked = await led.IsMoonLight();
             content.Children.Add(moonlightButton);
             var daylightButton = new ToggleButton {
                 Content = "☀",
@@ -68,6 +71,7 @@ namespace my_lights
                 IsChecked = await led.IsDayLight(),
             };
             daylightButton.Click += async (sender, args) => await led.SetDayLight();
+            led.PowerToggled += async() => daylightButton.IsChecked = await led.IsDayLight();
             content.Children.Add(daylightButton);
 
             // set temp
@@ -83,6 +87,7 @@ namespace my_lights
             };
             tempSlider.PreviewMouseUp += async (sender, eventArgs) =>
                 await led.SetTemperature(Convert.ToInt32(Math.Round(tempSlider.Value)));
+            led.PowerToggled += async() => tempSlider.Value = await led.GetTemperature();
             content.Children.Add(tempSlider);
 
             // settings
@@ -93,7 +98,6 @@ namespace my_lights
                 Margin = new Thickness(4),
             };
             // configButton.Click += async (sender, args) =>
-            //     await 
             content.Children.Add(configButton);
 
 

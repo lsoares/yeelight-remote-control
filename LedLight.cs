@@ -6,6 +6,8 @@ using YeelightAPI.Models;
 
 namespace my_lights
 {
+    public delegate void PowerToggle();
+
     class LedLight
     {
         private readonly Device _device;
@@ -18,11 +20,14 @@ namespace my_lights
         public object Name => _device.Name;
         public object Hostname => _device.Hostname;
 
+        public event PowerToggle PowerToggled;
+
         public async Task TogglePower() {
             await Connect();
             await _device.Toggle();
+            PowerToggled?.Invoke();
         }
-
+        
         public async Task<bool> IsPowerOn() {
             await Connect();
             return (string) await _device.GetProp(PROPERTIES.power) == "on";
@@ -45,7 +50,6 @@ namespace my_lights
         public async Task SetBrightness(int value) {
             await Connect();
             if (!await IsPowerOn()) await TogglePower();
-            // send event power toggled
             await _device.SetBrightness(value, 10);
         }
 
@@ -63,11 +67,13 @@ namespace my_lights
         public async Task SetDayLight() {
             await Connect();
             await _device.SetPower(true, null, PowerOnMode.Ct);
+            PowerToggled?.Invoke();
         }
 
         public async Task SetMoonLight() {
             await Connect();
             await _device.SetPower(true, null, PowerOnMode.Night);
+            PowerToggled?.Invoke();
         }
 
         private async Task Connect() {
