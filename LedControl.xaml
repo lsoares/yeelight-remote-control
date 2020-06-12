@@ -1,0 +1,36 @@
+<UserControl x:Class="my_lights.LedControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             Loaded="LedControl_OnLoaded">
+    <StackPanel Orientation="Horizontal">
+        <Label Name="Label" />
+        <ToggleButton Name="Power" Width="32" Content="⚡" Click="PowerButtonClick" />
+
+        <Slider Name="Brightness"
+                Minimum="1" Maximum="100"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                TickFrequency="5"
+                Width="120"
+                ToolTip="Set brightness"
+                PreviewMouseUp="Brightness_OnPreviewMouseUp" />
+
+        <ToggleButton Name="MoonMode" Content="🌙" Width="32" ToolTip="Set moon mode" Click="MoonMode_OnClick" />
+        <ToggleButton Name="SunMode" Content="☀" Width="32" ToolTip="Set sun mode" Click="SunMode_OnClick" />
+
+
+        <Slider Name="Temperature"
+                Minimum="2700" Maximum="5700"
+                IsMoveToPointEnabled="True"
+                IsSnapToTickEnabled="True"
+                TickFrequency="20"
+                Width="80"
+                ToolTip="Set temperature"
+                PreviewMouseUp="Temperature_OnPreviewMouseUp" />
+        
+        <Button Name="Configuration" Content="🛠" Width="32" Click="Configuration_OnClick" />
+    </StackPanel>
+</UserControl>

@@ -8,7 +8,7 @@ namespace my_lights
 {
     public delegate void PowerToggle();
 
-    class LedLight
+    public class LedLight
     {
         private readonly Device _device;
 
@@ -35,10 +35,10 @@ namespace my_lights
 
         public async Task<int> GetBrightness() {
             await Connect();
-            return Int32.Parse((string) await _device.GetProp(await IsDayLight() ? PROPERTIES.bright : PROPERTIES.nl_br));
+            return Int32.Parse((string) await _device.GetProp(await IsSunLight() ? PROPERTIES.bright : PROPERTIES.nl_br));
         }
 
-        public async Task<bool> IsDayLight() {
+        public async Task<bool> IsSunLight() {
             await Connect();
             return (string) await _device.GetProp(PROPERTIES.active_mode) == "0";
         }
@@ -64,7 +64,7 @@ namespace my_lights
             return Int32.Parse((string) await _device.GetProp(PROPERTIES.ct));
         }
         
-        public async Task SetDayLight() {
+        public async Task SetSunLight() {
             await Connect();
             await _device.SetPower(true, null, PowerOnMode.Ct);
             PowerToggled?.Invoke();

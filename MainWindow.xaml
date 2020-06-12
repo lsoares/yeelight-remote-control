@@ -8,5 +8,5 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Loaded="Window_Loaded">
-    <StackPanel Name="SplMain" />
+    <StackPanel Name="SplMain" Orientation="Vertical" />
 </Window>
