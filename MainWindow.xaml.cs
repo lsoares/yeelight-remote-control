@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+﻿using System.Windows;
 
 namespace my_lights
 {
@@ -10,12 +7,11 @@ namespace my_lights
         private readonly Yeelights _yee = new Yeelights();
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            SplMain.Children.Clear();
-            _yee.discover((o, args) => Dispatcher?.Invoke(() => AddDevice(new CeilingLed(args.Device))));
-        }
-
-        private void AddDevice(CeilingLed ceilingLed) {
-            SplMain.Children.Add(new CeilingLedControl(ceilingLed));
+            _yee.discover((o, args) =>
+                Dispatcher?.Invoke(() =>
+                    SplMain.Children.Add(new CeilingLedControl(new CeilingLed(args.Device)))
+                )
+            );
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace my_lights
 {
-    public partial class CeilingLedControl : UserControl
+    public partial class CeilingLedControl
     {
         private readonly CeilingLed _led;
 
@@ -18,8 +18,6 @@ namespace my_lights
         private async void LedControl_OnLoaded(object sender, RoutedEventArgs e) {
             await UpdateState();
             _led.PowerToggled += async () => await UpdateState();
-
-            // TODO set name
         }
 
         private async Task UpdateState() {
@@ -33,7 +31,7 @@ namespace my_lights
         }
 
         private async void PowerButtonClick(object sender, RoutedEventArgs e) {
-            await _led.TogglePower();
+            await _led.SetPower(Power.IsChecked == true);
         }
 
         private async void Brightness_OnPreviewMouseUp(object sender, MouseButtonEventArgs e) {
@@ -53,7 +51,9 @@ namespace my_lights
         }
 
         private void Configuration_OnClick(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+            // TODO set name
+            // TODO set default state
+            // TODO 
         }
     }
 }

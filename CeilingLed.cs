@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using YeelightAPI;
 using YeelightAPI.Models;
 
+// https://www.yeelight.com/download/Yeelight_Inter-Operation_Spec.pdf
 namespace my_lights
 {
     public delegate void PowerToggle();
@@ -11,6 +12,7 @@ namespace my_lights
     public class CeilingLed
     {
         private readonly Device _device;
+        private const int SmoothMs = 500;
 
         public CeilingLed(Device device) {
             _device = device;
@@ -20,14 +22,6 @@ namespace my_lights
         public object Name => _device.Name;
         public object Hostname => _device.Hostname;
 
-        public event PowerToggle PowerToggled;
-
-        public async Task TogglePower() {
-            await Connect();
-            await _device.Toggle();
-            PowerToggled?.Invoke();
-        }
-        
         public async Task<bool> IsPowerOn() {
             await Connect();
             return (string) await _device.GetProp(PROPERTIES.power) == "on";
@@ -35,44 +29,54 @@ namespace my_lights
 
         public async Task<int> GetBrightness() {
             await Connect();
-            return Int32.Parse((string) await _device.GetProp(await IsSunLight() ? PROPERTIES.bright : PROPERTIES.nl_br));
+            return Int32.Parse(
+                (string) await _device.GetProp(await IsSunLight() ? PROPERTIES.bright : PROPERTIES.nl_br)
+            );
         }
 
         public async Task<bool> IsSunLight() {
             await Connect();
             return (string) await _device.GetProp(PROPERTIES.active_mode) == "0";
         }
-        
+
         public async Task<bool> IsMoonLight() {
             return (string) await _device.GetProp(PROPERTIES.active_mode) == "1";
         }
 
-        public async Task SetBrightness(int value) {
+        public event PowerToggle PowerToggled;
+
+        public async Task SetPower(bool power) {
             await Connect();
-            if (!await IsPowerOn()) await TogglePower();
-            await _device.SetBrightness(value, 10);
+            await _device.SetPower(power, SmoothMs);
+            PowerToggled?.Invoke();
         }
 
-        public async Task SetTemperature(int value) {
+        public async Task SetBrightness(int value) { // 1~100
             await Connect();
-            if (!await IsPowerOn()) await TogglePower();
-            await _device.SetColorTemperature(value, 10);
+            await SetPower(true);
+            await _device.SetBrightness(value, SmoothMs);
         }
 
-        public async Task<double> GetTemperature() { // 2700~5700
+        public async Task SetTemperature(int value) { // 2700~5700
+            await Connect();
+            await SetPower(true);
+            await _device.SetColorTemperature(value, SmoothMs);
+        }
+
+        public async Task<double> GetTemperature() {
             await Connect();
             return Int32.Parse((string) await _device.GetProp(PROPERTIES.ct));
         }
-        
+
         public async Task SetSunLight() {
             await Connect();
-            await _device.SetPower(true, null, PowerOnMode.Ct);
+            await _device.SetPower(true, SmoothMs, PowerOnMode.Ct);
             PowerToggled?.Invoke();
         }
 
         public async Task SetMoonLight() {
             await Connect();
-            await _device.SetPower(true, null, PowerOnMode.Night);
+            await _device.SetPower(true, SmoothMs, PowerOnMode.Night);
             PowerToggled?.Invoke();
         }
 
