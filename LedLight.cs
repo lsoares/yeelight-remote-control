@@ -30,17 +30,28 @@ namespace my_lights
 
         public async Task<int> GetBrightness() {
             await Connect();
-            var isDayLight = (string) await _device.GetProp(PROPERTIES.active_mode) == "0";
-            return Int32.Parse((string) await _device.GetProp(isDayLight ? PROPERTIES.bright : PROPERTIES.nl_br));
+            return Int32.Parse((string) await _device.GetProp(await IsDayLight() ? PROPERTIES.bright : PROPERTIES.nl_br));
+        }
+
+        public async Task<bool> IsDayLight() {
+            await Connect();
+            return (string) await _device.GetProp(PROPERTIES.active_mode) == "0";
+        }
+        
+        public async Task<bool> IsMoonLight() {
+            return (string) await _device.GetProp(PROPERTIES.active_mode) == "1";
         }
 
         public async Task SetBrightness(int value) {
             await Connect();
+            if (!await IsPowerOn()) await TogglePower();
+            // send event power toggled
             await _device.SetBrightness(value, 10);
         }
 
         public async Task SetTemperature(int value) {
             await Connect();
+            if (!await IsPowerOn()) await TogglePower();
             await _device.SetColorTemperature(value, 10);
         }
 

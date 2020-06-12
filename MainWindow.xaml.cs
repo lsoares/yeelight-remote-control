@@ -16,14 +16,15 @@ namespace my_lights
 
         private async void AddDevice(LedLight led) {
             var row = new StackPanel {Orientation = Orientation.Vertical};
-
-            // on/off
-            var title = new Label {Content = led.Name, ToolTip = led.Hostname};
-            row.Children.Add(title);
-            row.Children.Add(new Separator {Height = 4});
             var content = new StackPanel {Orientation = Orientation.Horizontal};
             row.Children.Add(content);
 
+            // title
+            var title = new Label {Content = led.Name, ToolTip = led.Hostname};
+            row.Children.Add(title);
+            row.Children.Add(new Separator {Height = 2, Margin = new Thickness(4)});
+
+            // on/off
             var toggleBt = new ToggleButton {
                 Content = "⚡",
                 Width = 32,
@@ -44,26 +45,27 @@ namespace my_lights
                 Width = 120,
                 ToolTip = "Set brightness",
             };
-            brightnessSlider.PreviewMouseUp += async (sender, eventArgs) => 
+            brightnessSlider.PreviewMouseUp += async (sender, eventArgs) =>
                 await led.SetBrightness(Convert.ToInt32(Math.Round(brightnessSlider.Value)));
             content.Children.Add(brightnessSlider);
 
-            // TODO: get initial state & use toggle button
             // set mode (moonlight/daylight)
             // TODO smooth if is turned off
-            var moonlightButton = new Button {
+            var moonlightButton = new ToggleButton {
                 Content = "🌙",
                 Width = 32,
                 ToolTip = "Set moon mode",
-                Margin = new Thickness(4)
+                Margin = new Thickness(4),
+                IsChecked = await led.IsMoonLight(),
             };
             moonlightButton.Click += async (sender, args) => await led.SetMoonLight();
             content.Children.Add(moonlightButton);
-            var daylightButton = new Button {
+            var daylightButton = new ToggleButton {
                 Content = "☀",
                 Width = 32,
                 ToolTip = "Set sun mode",
-                Margin = new Thickness(4)
+                Margin = new Thickness(4),
+                IsChecked = await led.IsDayLight(),
             };
             daylightButton.Click += async (sender, args) => await led.SetDayLight();
             content.Children.Add(daylightButton);
@@ -82,12 +84,26 @@ namespace my_lights
             tempSlider.PreviewMouseUp += async (sender, eventArgs) =>
                 await led.SetTemperature(Convert.ToInt32(Math.Round(tempSlider.Value)));
             content.Children.Add(tempSlider);
-            
-            // TODO: get initial state of power and mode
+
+            // settings
+            var configButton = new Button {
+                Content = "🛠️",
+                Width = 32,
+                ToolTip = "Setup",
+                Margin = new Thickness(4),
+            };
+            // configButton.Click += async (sender, args) =>
+            //     await 
+            content.Children.Add(configButton);
+
+
+            // TODO set name
             // set default
-            // set name
             // set schedule
             // no lights founds warning
+
+            // TODO: update UI automatically
+            // TODO: update UI when UI control is used
         }
     }
 }
