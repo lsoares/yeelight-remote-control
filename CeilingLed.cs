@@ -8,11 +8,11 @@ namespace my_lights
 {
     public delegate void PowerToggle();
 
-    public class LedLight
+    public class CeilingLed
     {
         private readonly Device _device;
 
-        public LedLight(Device device) {
+        public CeilingLed(Device device) {
             _device = device;
             Console.WriteLine(JsonConvert.SerializeObject(device));
         }

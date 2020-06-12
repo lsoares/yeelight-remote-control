@@ -11,11 +11,11 @@ namespace my_lights
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             SplMain.Children.Clear();
-            _yee.discover((o, args) => Dispatcher?.Invoke(() => AddDevice(new LedLight(args.Device))));
+            _yee.discover((o, args) => Dispatcher?.Invoke(() => AddDevice(new CeilingLed(args.Device))));
         }
 
-        private void AddDevice(LedLight led) {
-            SplMain.Children.Add(new LedControl(led));
+        private void AddDevice(CeilingLed ceilingLed) {
+            SplMain.Children.Add(new CeilingLedControl(ceilingLed));
         }
     }
 }

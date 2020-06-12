@@ -6,12 +6,12 @@ using System.Windows.Input;
 
 namespace my_lights
 {
-    public partial class LedControl : UserControl
+    public partial class CeilingLedControl : UserControl
     {
-        private readonly LedLight _led;
+        private readonly CeilingLed _led;
 
-        public LedControl(LedLight ledLight) {
-            _led = ledLight;
+        public CeilingLedControl(CeilingLed led) {
+            _led = led;
             InitializeComponent();
         }
 
@@ -20,9 +20,6 @@ namespace my_lights
             _led.PowerToggled += async () => await UpdateState();
 
             // TODO set name
-            // set default
-            // set schedule
-            // no lights founds warning
         }
 
         private async Task UpdateState() {
