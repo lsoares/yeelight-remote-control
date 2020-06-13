@@ -19,9 +19,9 @@
     <tb:TaskbarIcon ToolTipText="Yeelight R/C"
                     IconSource="/icons/favicon.ico">
         <tb:TaskbarIcon.TrayPopup>
-            <Border Background="White"
-                    BorderBrush="Gray"
-                    BorderThickness="2"
+            <Border Background="#fff1f0"
+                    BorderBrush="Thistle"
+                    BorderThickness="4"
                     CornerRadius="8">
                 <StackPanel Name="MainContent" Orientation="Vertical" />
             </Border>
