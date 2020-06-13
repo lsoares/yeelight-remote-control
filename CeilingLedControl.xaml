@@ -5,32 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              Loaded="LedControl_OnLoaded">
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Vertical" Margin="12" HorizontalAlignment="Left">
         <Label Name="Label" />
-        <ToggleButton Name="Power" Width="32" Content="⚡" Click="PowerButtonClick" />
-
-        <Slider Name="Brightness"
-                Minimum="1" Maximum="100"
-                IsMoveToPointEnabled="True"
-                IsSnapToTickEnabled="True"
-                TickFrequency="5"
-                Width="120"
-                ToolTip="Set brightness"
-                PreviewMouseUp="Brightness_OnPreviewMouseUp" />
-
-        <ToggleButton Name="MoonMode" Content="🌙" Width="32" ToolTip="Set moon mode" Click="MoonMode_OnClick" />
-        <ToggleButton Name="SunMode" Content="☀" Width="32" ToolTip="Set sun mode" Click="SunMode_OnClick" />
-
-
-        <Slider Name="Temperature"
-                Minimum="2700" Maximum="5700"
-                IsMoveToPointEnabled="True"
-                IsSnapToTickEnabled="True"
-                TickFrequency="20"
-                Width="80"
-                ToolTip="Set temperature"
-                PreviewMouseUp="Temperature_OnPreviewMouseUp" />
-        
-        <Button Name="Configuration" Content="🛠" Width="32" Click="Configuration_OnClick" />
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <ToggleButton Name="Power" Content="⚡" Click="PowerButtonClick" />
+    
+            <Slider Name="Brightness"
+                    Minimum="1" Maximum="100"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="5"
+                    Width="120"
+                    ToolTip="Set brightness"
+                    PreviewMouseUp="Brightness_OnPreviewMouseUp" />
+    
+            <ToggleButton Name="MoonMode" Content="🌙" ToolTip="Set moon mode" Click="MoonMode_OnClick" />
+            <ToggleButton Name="SunMode" Content="☀" ToolTip="Set sun mode" Click="SunMode_OnClick" />
+    
+    
+            <Slider Name="Temperature"
+                    Minimum="2700" Maximum="5700"
+                    IsMoveToPointEnabled="True"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="20"
+                    Width="80"
+                    ToolTip="Set temperature"
+                    PreviewMouseUp="Temperature_OnPreviewMouseUp" />
+            
+            <Button Name="Configuration" Content="🛠" Click="Configuration_OnClick" />
+        </StackPanel>    
     </StackPanel>
 </UserControl>

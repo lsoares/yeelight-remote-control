@@ -5,6 +5,7 @@ using YeelightAPI;
 using YeelightAPI.Models;
 
 // https://www.yeelight.com/download/Yeelight_Inter-Operation_Spec.pdf
+// https://github.com/roddone/YeelightAPI
 namespace my_lights
 {
     public delegate void PowerToggle();
@@ -43,7 +44,7 @@ namespace my_lights
             return (string) await _device.GetProp(PROPERTIES.active_mode) == "1";
         }
 
-        public event PowerToggle PowerToggled;
+        public event PowerToggle? PowerToggled;
 
         public async Task SetPower(bool power) {
             await Connect();
