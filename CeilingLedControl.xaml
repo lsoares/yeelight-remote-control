@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              Loaded="LedControl_OnLoaded">
-    <StackPanel Orientation="Vertical" Margin="12" HorizontalAlignment="Left">
-        <Label Name="Label" />
+    <StackPanel Orientation="Vertical" Margin="8, 0, 8, 12">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+           <Label Name="Label" />
+           <Button Name="Configuration" Content="+" Click="Configuration_OnClick"
+                   Background="Transparent" BorderThickness="0" />
+        </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <ToggleButton Name="Power" Content="⚡" Click="PowerButtonClick" />
     
@@ -31,8 +35,6 @@
                     Width="80"
                     ToolTip="Set temperature"
                     PreviewMouseUp="Temperature_OnPreviewMouseUp" />
-            
-            <Button Name="Configuration" Content="🛠" Click="Configuration_OnClick" />
         </StackPanel>    
     </StackPanel>
 </UserControl>

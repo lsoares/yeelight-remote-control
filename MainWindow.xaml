@@ -10,18 +10,21 @@
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
+        ResizeMode="CanMinimize"
+        MouseDown="Window_MouseDown"
         Loaded="Window_Loaded">
         <Border Background="White"
                 BorderBrush="Gray" 
                 BorderThickness="2"
                 CornerRadius="8">
             <StackPanel>
-                <Button HorizontalAlignment="Right" Margin="0"
-                        Click="Exit" Width="16"
+                <Button HorizontalAlignment="Right" 
+                        Click="Exit"
                         BorderThickness="0"
                         ToolTip="Exit"
                         Background="Transparent"
-                        Content="x" />
+                        Content="x"
+                        Margin="0,0,4,0" />
                 <StackPanel Name="MainContent" Orientation="Vertical" />
             </StackPanel>
         </Border>     
