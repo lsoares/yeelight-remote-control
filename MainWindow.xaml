@@ -16,23 +16,20 @@
         ShowInTaskbar="False"
         Icon="/icons/favicon.ico"
         Loaded="Window_Loaded">
-    <tb:TaskbarIcon ToolTipText="Yeelight R/C" IconSource="/icons/favicon.ico">
+    <tb:TaskbarIcon ToolTipText="Yeelight R/C"
+                    IconSource="/icons/favicon.ico">
         <tb:TaskbarIcon.TrayPopup>
             <Border Background="White"
                     BorderBrush="Gray"
                     BorderThickness="2"
                     CornerRadius="8">
-                <StackPanel>
-                    <Button HorizontalAlignment="Right"
-                            Click="Exit"
-                            BorderThickness="0"
-                            ToolTip="Exit"
-                            Background="Transparent"
-                            Content="x"
-                            Margin="0,0,4,0" />
-                    <StackPanel Name="MainContent" Orientation="Vertical" />
-                </StackPanel>
+                <StackPanel Name="MainContent" Orientation="Vertical" />
             </Border>
         </tb:TaskbarIcon.TrayPopup>
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Exit" HorizontalAlignment="Left" Click="Exit" />
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
     </tb:TaskbarIcon>
 </Window>
