@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using YeelightAPI;
 
 namespace my_lights
@@ -11,6 +12,10 @@ namespace my_lights
                     device => MainContent.Children.Add(new CeilingLedControl(new CeilingLed(device)))
                 )
             );
+        }
+
+        private void Exit(object sender, RoutedEventArgs e) {
+            Environment.Exit(0);
         }
     }
 }

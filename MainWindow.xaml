@@ -7,6 +7,22 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="Transparent"
         Loaded="Window_Loaded">
-    <StackPanel Name="MainContent" Orientation="Vertical" />
+        <Border Background="White"
+                BorderBrush="Gray" 
+                BorderThickness="2"
+                CornerRadius="8">
+            <StackPanel>
+                <Button HorizontalAlignment="Right" Margin="0"
+                        Click="Exit" Width="16"
+                        BorderThickness="0"
+                        ToolTip="Exit"
+                        Background="Transparent"
+                        Content="x" />
+                <StackPanel Name="MainContent" Orientation="Vertical" />
+            </StackPanel>
+        </Border>     
 </Window>
