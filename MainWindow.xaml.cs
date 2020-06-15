@@ -34,7 +34,17 @@ namespace my_lights
         }
 
         private async void TurnOnAll(object sender, RoutedEventArgs e) {
-            await CeilingLed.Discover(async led => await led.SetPower(true));
+            await CeilingLed.Discover(async led => {
+                await led.SetSunLight();
+                await led.SetBrightness(0);
+            });
+        }
+        
+        private async void TurnOnAllMoon(object sender, RoutedEventArgs e) {
+            await CeilingLed.Discover(async led => {
+                await led.SetMoonLight();
+                await led.SetBrightness(50);
+            });
         }
 
         private void About(object sender, RoutedEventArgs e) {

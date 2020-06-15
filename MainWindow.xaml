@@ -29,6 +29,7 @@
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="Turn all on" Click="TurnOnAll" />
+                <MenuItem Header="Turn all on in moon light" Click="TurnOnAllMoon" />
                 <MenuItem Header="Turn all off" Click="TurnOffAll" />
                 <Separator />
                 <MenuItem Header="About" Click="About" />

@@ -8,8 +8,8 @@
     <StackPanel Orientation="Vertical" Margin="8, 0, 8, 12">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
            <Label Name="Label" />
-           <Button Name="Configuration" Content="+" Click="Configuration_OnClick"
-                   Background="Transparent" BorderThickness="0" />
+           <Button Content="+" Click="Configuration_OnClick"
+                   Background="Transparent" BorderThickness="0"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <ToggleButton Name="Power" Content="⚡" Click="PowerButtonClick" />
@@ -25,8 +25,7 @@
     
             <ToggleButton Name="MoonMode" Content="🌙" ToolTip="Set moon mode" Click="MoonMode_OnClick" />
             <ToggleButton Name="SunMode" Content="☀" ToolTip="Set sun mode" Click="SunMode_OnClick" />
-    
-    
+
             <Slider Name="Temperature"
                     Minimum="2700" Maximum="5700"
                     IsMoveToPointEnabled="True"
