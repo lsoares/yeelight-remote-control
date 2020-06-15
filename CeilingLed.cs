@@ -20,8 +20,8 @@ namespace my_lights
             Console.WriteLine(JsonConvert.SerializeObject(device));
         }
 
-        public object Name => _device.Name;
-        public object Hostname => _device.Hostname;
+        public string? Name => _device.Name;
+        public string Hostname => _device.Hostname;
 
         public static async Task Discover(Action<CeilingLed> perLed) {
             (await DeviceLocator.Discover()).ForEach(
@@ -84,6 +84,12 @@ namespace my_lights
         public async Task SetMoonLight() {
             await Connect();
             await _device.SetPower(true, SmoothMs, PowerOnMode.Night);
+            PowerToggled?.Invoke();
+        }
+
+        public async Task SetName(String name) {
+            await Connect();
+            await _device.SetName(name);
             PowerToggled?.Invoke();
         }
 

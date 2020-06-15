@@ -15,6 +15,7 @@ Per led:
 - Set brightness
 - Switch between Normal/Moonlight mode
 - Set temperature
+- Set LED name
 
 General:
 - Turn all leds on/off

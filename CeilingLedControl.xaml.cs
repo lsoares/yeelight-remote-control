@@ -1,7 +1,7 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace my_lights
@@ -21,7 +21,7 @@ namespace my_lights
         }
 
         private async Task UpdateState() {
-            Label.Content = _led.Name;
+            Label.Content = Coalesce(_led.Name, _led.Hostname);
             Label.ToolTip = _led.Hostname;
             Power.IsChecked = await _led.IsPowerOn();
             Brightness.Value = await _led.GetBrightness();
@@ -29,6 +29,8 @@ namespace my_lights
             SunMode.IsChecked = await _led.IsSunLight();
             Temperature.Value = await _led.GetTemperature();
         }
+        
+        static string? Coalesce(params string?[] strings) => strings.FirstOrDefault(s => !string.IsNullOrEmpty(s));
 
         private async void PowerButtonClick(object sender, RoutedEventArgs e) {
             await _led.SetPower(Power.IsChecked == true);
@@ -51,9 +53,15 @@ namespace my_lights
         }
 
         private void Configuration_OnClick(object sender, RoutedEventArgs e) {
-            // TODO set name
             // TODO set default state
-            // TODO 
+            LedHostname.Text = (string) _led.Hostname;
+            LedName.Text = _led.Name;
+            ConfigurationPopup.IsOpen = true;
+        }
+
+        private async void Save_Configuration(object sender, RoutedEventArgs e) {
+            await _led.SetName(LedName.Text);
+            ConfigurationPopup.IsOpen = false;
         }
     }
 }

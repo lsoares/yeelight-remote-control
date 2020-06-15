@@ -7,13 +7,23 @@
              Loaded="LedControl_OnLoaded">
     <StackPanel Orientation="Vertical" Margin="8, 0, 8, 12">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-           <Label Name="Label" />
-           <Button Content="+" Click="Configuration_OnClick"
-                   Background="Transparent" BorderThickness="0"/>
+            <Label Name="Label" MouseLeftButtonUp="Configuration_OnClick" Cursor="Hand" />
+            <Popup Name="ConfigurationPopup" StaysOpen="False" AllowsTransparency="True">
+                <Border Background="Gainsboro"
+                        BorderBrush="Thistle"
+                        BorderThickness="2"
+                        CornerRadius="8">
+                    <StackPanel Orientation="Vertical" Margin="6">
+                        <TextBlock Name="LedHostname" />
+                        <TextBox Name="LedName" Width="80" />
+                        <Button Content="Save" Click="Save_Configuration" />
+                    </StackPanel>
+                </Border>
+            </Popup>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <ToggleButton Name="Power" Content="⚡" Click="PowerButtonClick" />
-    
+
             <Slider Name="Brightness"
                     Minimum="1" Maximum="100"
                     IsMoveToPointEnabled="True"
@@ -22,7 +32,7 @@
                     Width="120"
                     ToolTip="Set brightness"
                     PreviewMouseUp="Brightness_OnPreviewMouseUp" />
-    
+
             <ToggleButton Name="MoonMode" Content="🌙" ToolTip="Set moon mode" Click="MoonMode_OnClick" />
             <ToggleButton Name="SunMode" Content="☀" ToolTip="Set sun mode" Click="SunMode_OnClick" />
 
@@ -34,6 +44,6 @@
                     Width="80"
                     ToolTip="Set temperature"
                     PreviewMouseUp="Temperature_OnPreviewMouseUp" />
-        </StackPanel>    
+        </StackPanel>
     </StackPanel>
 </UserControl>
