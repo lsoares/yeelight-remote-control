@@ -1,5 +1,5 @@
 # Yeelight Remote Control
-This utility controls Yeelight/Xiaomi LED Lights.
+This utility controls Yeelight/Xiaomi LED Lights. It can be accessed in the Windows system tray.
 
 ![Screenshot](screenshot.jpg)
 
@@ -9,10 +9,15 @@ Thanks to [roddone/YeelightAPI](https://github.com/roddone/YeelightAPI).
 
 ## Features
 (only tested with Ceiling LEDs)
-- Power on/off
+
+Per led:
+- Turn on/off
 - Set brightness
 - Switch between Normal/Moonlight mode
 - Set temperature
+
+General:
+- Turn all leds on/off
 
 ## Building
 1. Install [.NET Core SDK](https://dotnet.microsoft.com/download)

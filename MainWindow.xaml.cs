@@ -2,17 +2,15 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using YeelightAPI;
 
 namespace my_lights
 {
     public partial class MainWindow
     {
-        // TODO turn on/off all
         // TODO refresh on show window
         // TODO set .exe icon
-        // TODO disable controls for a second
+        // TODO disable controls for a second or avoid SetPower every time
         // TODO double click also works
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
@@ -32,8 +30,29 @@ namespace my_lights
             Environment.Exit(0);
         }
 
+        // TODO. put this function (3 times) at CeilingLed.cs
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
             if (e.ChangedButton == MouseButton.Left) DragMove();
+        }
+
+        private void TurnOffAll(object sender, RoutedEventArgs e) {
+            Dispatcher?.Invoke(async () =>
+                (await DeviceLocator.Discover()).ForEach(
+                    async device => {
+                        var led = new CeilingLed(device);
+                        await led.SetPower(false);
+                    })
+            );
+        }
+        
+        private void TurnOnAll(object sender, RoutedEventArgs e) {
+            Dispatcher?.Invoke(async () =>
+                (await DeviceLocator.Discover()).ForEach(
+                    async device => {
+                        var led = new CeilingLed(device);
+                        await led.SetPower(true);
+                    })
+            );
         }
     }
 }
