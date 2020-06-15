@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -34,6 +35,13 @@ namespace my_lights
 
         private async void TurnOnAll(object sender, RoutedEventArgs e) {
             await CeilingLed.Discover(async led => await led.SetPower(true));
+        }
+
+        private void About(object sender, RoutedEventArgs e) {
+            Process.Start(
+                new ProcessStartInfo("cmd", "/c start https://github.com/lsoares/yeelight-remote-control")
+                    {CreateNoWindow = true}
+            );
         }
     }
 }
