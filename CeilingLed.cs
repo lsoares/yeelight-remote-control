@@ -23,6 +23,12 @@ namespace my_lights
         public object Name => _device.Name;
         public object Hostname => _device.Hostname;
 
+        public static async Task Discover(Action<CeilingLed> perLed) {
+            (await DeviceLocator.Discover()).ForEach(
+                device => perLed(new CeilingLed(device))
+            );
+        }
+
         public async Task<bool> IsPowerOn() {
             await Connect();
             return (string) await _device.GetProp(PROPERTIES.power) == "on";

@@ -30,6 +30,7 @@
             <ContextMenu>
                 <MenuItem Header="Turn all on" Click="TurnOnAll" />
                 <MenuItem Header="Turn all off" Click="TurnOffAll" />
+                <Separator />
                 <MenuItem Header="Exit" Click="Exit" />
             </ContextMenu>
         </tb:TaskbarIcon.ContextMenu>
