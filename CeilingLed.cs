@@ -15,7 +15,7 @@ namespace my_lights
         private readonly Device _device;
         private const int SmoothMs = 500;
 
-        public CeilingLed(Device device) {
+        private CeilingLed(Device device) {
             _device = device;
             Console.WriteLine(JsonConvert.SerializeObject(device));
         }

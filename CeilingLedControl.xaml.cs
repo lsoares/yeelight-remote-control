@@ -54,7 +54,7 @@ namespace my_lights
 
         private void Configuration_OnClick(object sender, RoutedEventArgs e) {
             // TODO set default state
-            LedHostname.Text = (string) _led.Hostname;
+            LedHostname.Text = _led.Hostname;
             LedName.Text = _led.Name;
             ConfigurationPopup.IsOpen = true;
         }

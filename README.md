@@ -7,6 +7,8 @@ Runs only on Windows.
 
 Thanks to [roddone/YeelightAPI](https://github.com/roddone/YeelightAPI). 
 
+**[Contribute](https://paypal.me/lsoares1)**
+
 ## Features
 (only tested with Ceiling LEDs)
 
