@@ -9,7 +9,6 @@ namespace my_lights
     public partial class MainWindow
     {
         // TODO set .exe icon
-        // TODO double click also works
         private async void Window_Loaded(object sender, RoutedEventArgs e) {
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
             await CeilingLed.Discover(led => MainContent.Children.Add(new CeilingLedControl(led)));

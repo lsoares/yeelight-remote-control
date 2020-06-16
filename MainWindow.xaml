@@ -17,7 +17,8 @@
         Icon="/icons/favicon.ico"
         Loaded="Window_Loaded">
     <tb:TaskbarIcon ToolTipText="Yeelight R/C"
-                    IconSource="/icons/favicon.ico">
+                    IconSource="/icons/favicon.ico"
+                    PopupActivation="LeftOrDoubleClick">
         <tb:TaskbarIcon.TrayPopup>
             <Border Background="#fff1f0"
                     BorderBrush="Thistle"
