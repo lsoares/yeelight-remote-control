@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              Loaded="LedControl_OnLoaded">
-    <StackPanel Orientation="Vertical" Margin="8, 0, 8, 12">
+    <StackPanel Orientation="Vertical" Margin="8, 0, 8, 12" Name="Content">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
             <Label Name="Label" MouseLeftButtonUp="Configuration_OnClick" Cursor="Hand" />
             <Popup Name="ConfigurationPopup" StaysOpen="False" AllowsTransparency="True">
@@ -16,10 +16,10 @@
                     <StackPanel Orientation="Vertical" Margin="6">
                         <TextBlock Name="LedHostname" />
                         <StackPanel Margin="6">
-                            <Button Content="Set default" Click="Set_default" />
+                            <Button Content="Set default" Click="Set_default" ToolTip="Sets the default LED state after power reset" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="6">
-                            <TextBox Name="LedName" Width="80" />
+                            <TextBox Name="LedName" Width="80" ToolTip="Sets the LED name" />
                             <Button Content="Update name" Click="Set_Name" />
                         </StackPanel>
                     </StackPanel>

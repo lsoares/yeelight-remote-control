@@ -9,7 +9,6 @@ namespace my_lights
     public partial class MainWindow
     {
         // TODO set .exe icon
-        // TODO disable controls for a second or avoid SetPower every time
         // TODO double click also works
         private async void Window_Loaded(object sender, RoutedEventArgs e) {
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;

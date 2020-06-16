@@ -21,6 +21,7 @@ namespace my_lights
         }
 
         private async Task UpdateState() {
+            Content.IsEnabled = false;
             Label.Content = Coalesce(_led.Name, _led.Hostname);
             Label.ToolTip = _led.Hostname;
             Power.IsChecked = await _led.IsPowerOn();
@@ -28,8 +29,12 @@ namespace my_lights
             MoonMode.IsChecked = await _led.IsMoonLight();
             SunMode.IsChecked = await _led.IsSunLight();
             Temperature.Value = await _led.GetTemperature();
+            new System.Threading.Timer(
+                obj => Dispatcher?.Invoke(() => Content.IsEnabled = true),
+                null, 450L, System.Threading.Timeout.Infinite
+            );
         }
-        
+
         static string? Coalesce(params string?[] strings) => strings.FirstOrDefault(s => !string.IsNullOrEmpty(s));
 
         private async void PowerButtonClick(object sender, RoutedEventArgs e) {
@@ -62,7 +67,7 @@ namespace my_lights
             await _led.SetName(LedName.Text);
             ConfigurationPopup.IsOpen = false;
         }
-        
+
         private async void Set_default(object sender, RoutedEventArgs e) {
             await _led.SetDefault();
             ConfigurationPopup.IsOpen = false;
