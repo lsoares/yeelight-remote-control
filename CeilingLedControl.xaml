@@ -15,8 +15,13 @@
                         CornerRadius="8">
                     <StackPanel Orientation="Vertical" Margin="6">
                         <TextBlock Name="LedHostname" />
-                        <TextBox Name="LedName" Width="80" />
-                        <Button Content="Save" Click="Save_Configuration" />
+                        <StackPanel Margin="6">
+                            <Button Content="Set default" Click="Set_default" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="6">
+                            <TextBox Name="LedName" Width="80" />
+                            <Button Content="Update name" Click="Set_Name" />
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </Popup>

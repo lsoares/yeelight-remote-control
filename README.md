@@ -18,6 +18,7 @@ Per led:
 - Switch between Normal/Moonlight mode
 - Set temperature
 - Set LED name
+- Set default state
 
 General:
 - Turn all leds on/off

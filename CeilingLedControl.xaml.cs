@@ -53,14 +53,18 @@ namespace my_lights
         }
 
         private void Configuration_OnClick(object sender, RoutedEventArgs e) {
-            // TODO set default state
             LedHostname.Text = _led.Hostname;
             LedName.Text = _led.Name;
             ConfigurationPopup.IsOpen = true;
         }
 
-        private async void Save_Configuration(object sender, RoutedEventArgs e) {
+        private async void Set_Name(object sender, RoutedEventArgs e) {
             await _led.SetName(LedName.Text);
+            ConfigurationPopup.IsOpen = false;
+        }
+        
+        private async void Set_default(object sender, RoutedEventArgs e) {
+            await _led.SetDefault();
             ConfigurationPopup.IsOpen = false;
         }
     }

@@ -92,6 +92,11 @@ namespace my_lights
             await _device.SetName(name);
             PowerToggled?.Invoke();
         }
+        
+        public async Task SetDefault() {
+            await Connect();
+            await _device.SetDefault();
+        }
 
         private async Task Connect() {
             if (!_device.IsConnected) {
