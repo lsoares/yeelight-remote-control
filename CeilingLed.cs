@@ -37,7 +37,7 @@ namespace my_lights
         public async Task<int> GetBrightness() {
             await Connect();
             return Int32.Parse(
-                (string) await _device.GetProp(await IsSunLight() ? PROPERTIES.bright : PROPERTIES.nl_br)
+                (string) await _device.GetProp(await IsSunLight() ? PROPERTIES.bright : PROPERTIES.nl_br) ?? "50"
             );
         }
 
@@ -72,7 +72,7 @@ namespace my_lights
 
         public async Task<double> GetTemperature() {
             await Connect();
-            return Int32.Parse((string) await _device.GetProp(PROPERTIES.ct));
+            return Int32.Parse((string) await _device.GetProp(PROPERTIES.ct) ?? "4200");
         }
 
         public async Task SetSunLight() {
@@ -99,10 +99,7 @@ namespace my_lights
         }
 
         private async Task Connect() {
-            if (!_device.IsConnected) {
-                Console.WriteLine("Reconnecting..");
-                await _device.Connect();
-            }
+            if (!_device.IsConnected) await _device.Connect();
         }
     }
 }

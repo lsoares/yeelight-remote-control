@@ -17,11 +17,15 @@ namespace my_lights
 
         private async void LedControl_OnLoaded(object sender, RoutedEventArgs e) {
             await UpdateState();
-            _led.PowerToggled += async () => await UpdateState();
+            _led.PowerToggled += async () => {
+                Content.IsEnabled = false;
+                await UpdateState();
+                await Task.Delay(500)
+                    .ContinueWith(task => Dispatcher?.Invoke(() => Content.IsEnabled = true));
+            };
         }
 
         private async Task UpdateState() {
-            Content.IsEnabled = false;
             Label.Content = Coalesce(_led.Name, _led.Hostname);
             Label.ToolTip = _led.Hostname;
             Power.IsChecked = await _led.IsPowerOn();
@@ -29,10 +33,6 @@ namespace my_lights
             MoonMode.IsChecked = await _led.IsMoonLight();
             SunMode.IsChecked = await _led.IsSunLight();
             Temperature.Value = await _led.GetTemperature();
-            new System.Threading.Timer(
-                obj => Dispatcher?.Invoke(() => Content.IsEnabled = true),
-                null, 450L, System.Threading.Timeout.Infinite
-            );
         }
 
         static string? Coalesce(params string?[] strings) => strings.FirstOrDefault(s => !string.IsNullOrEmpty(s));
