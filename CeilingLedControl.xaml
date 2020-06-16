@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              Loaded="LedControl_OnLoaded">
     <StackPanel Orientation="Vertical" Margin="8, 0, 8, 12" Name="Content">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <StackPanel Orientation="Horizontal">
             <Label Name="Label" MouseLeftButtonUp="Configuration_OnClick" Cursor="Hand" />
             <Popup Name="ConfigurationPopup" StaysOpen="False" AllowsTransparency="True">
                 <Border Background="Gainsboro"
@@ -42,9 +42,11 @@
             <ToggleButton Name="SunMode" Content="☀" ToolTip="Set sun mode" Click="SunMode_OnClick" />
 
             <Slider Name="Temperature"
-                    Minimum="2700" Maximum="5700"
+                    Minimum="2700" 
+                    Maximum="5700"
                     IsMoveToPointEnabled="True"
                     IsSnapToTickEnabled="True"
+                    IsDirectionReversed="True"
                     TickFrequency="20"
                     Width="80"
                     ToolTip="Set temperature"
