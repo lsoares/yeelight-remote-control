@@ -3,3 +3,6 @@ obj/
 /packages/
 .idea/
 .vscode/
+.vs/
+/my_lights.csproj.user
+/Properties/PublishProfiles
