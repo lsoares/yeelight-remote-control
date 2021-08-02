@@ -23,15 +23,13 @@ Per led:
 General:
 - Turn all leds on/off
 
-## Building
+## Running
 1. Install [.NET Core SDK](https://dotnet.microsoft.com/download)
-1. git clone this project
+1. `git clone` this project
 1. Run: `dotnet build`
 1. Go to `\bin\Release\netcoreapp3.1`
-
-## Running
 1. Make sure [dev mode is enabled](https://www.yeelight.com/faqs/lan_control) per LED
-1. Open the executable
+1. Open the app executable
 1. Check in the system tray
 
 ### Other
